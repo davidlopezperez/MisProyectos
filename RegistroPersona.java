@@ -107,7 +107,7 @@ public class RegistroPersona {
        }
        
        public void pedirCUIL(){
-           System.out.println("Por favor ingre su número de CUIL");
+           System.out.println("Por favor ingrese su número de CUIL");
            e.setCuil(sc.nextLine());
            
        }
@@ -172,6 +172,7 @@ public class RegistroPersona {
                 "\nApellido: " + p.getLastName().toUpperCase() +
                 "\nNúmero de teléfono: " + p.getPhoneNumber() +
                 "\nNúmero de documento: " + e.getDni() +
+                "\nNumero de CUIL: " + e.getCuil() +
                 "\nFecha de nacimiento: " + e.getBirthday().getDate() + "-"+e.getBirthday().getMonth()+1 + "-" + e.getBirthday().getYear()+
                     
                 "\n¡GRACIAS POR REGISTRARSE!");
@@ -192,6 +193,7 @@ public class RegistroPersona {
         rp.pedirApellido();
         rp.pedirTelefono();
         rp.pedirDni();
+        rp.pedirCUIL();
         rp.pedirFechaNacimiento();
         rp.imprimirRegistro();
         rp.darEdad();
