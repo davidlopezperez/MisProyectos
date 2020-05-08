@@ -6,6 +6,7 @@
 package SistemaNombre;
 
 import java.util.Date;
+import java.util.Scanner;
 
 /**
  *
@@ -14,8 +15,9 @@ import java.util.Date;
 public class Empleado extends Persona{
     
     private int dni;
-    private String cuil;
+    private int cuil;
     private Date birthday;
+    Scanner sc = new Scanner(System.in);
     
     public Empleado(){
        
@@ -29,11 +31,11 @@ public class Empleado extends Persona{
         this.dni = dni;
     }
 
-    public String getCuil() {
+    public int getCuil() {
         return cuil;
     }
 
-    public void setCuil(String cuil) {
+    public void setCuil(int cuil) {
         this.cuil = cuil;
     }
 
@@ -44,4 +46,6 @@ public class Empleado extends Persona{
     public void setBirthday(Date birthday) {
         this.birthday = birthday;
     }
-}
+    
+   }
+
