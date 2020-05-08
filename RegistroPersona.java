@@ -28,7 +28,7 @@ public class RegistroPersona {
     String phoneNumber;
     int validCharacters = 10;
     Scanner sc = new Scanner(System.in);
-    DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    
     
     LocalDate ahora = LocalDate.now();
     Persona p = new Persona();
@@ -104,14 +104,14 @@ public class RegistroPersona {
            System.out.println("Por favor ingrese su número de Documento");
            int dni = sc.nextInt();
            e.setDni(dni);
-           
+       
        }
        
        public void pedirCuil(){
            System.out.println("Por favor ingrese su número de CUIL");
            int cuil = sc.nextInt();
            e.setCuil(cuil);
-  
+           
        }
        
        public void pedirFechaNacimiento(){
@@ -120,8 +120,8 @@ public class RegistroPersona {
             BufferedReader fecha = new BufferedReader(new InputStreamReader(System.in));
             BufferedReader fechaNacimieto = new BufferedReader(fecha);
             DateFormat df = DateFormat.getDateInstance(DateFormat.FULL);
-            SimpleDateFormat sfd = new SimpleDateFormat("yyyy-MM-dd");
-            System.out.println("Por favor ingrese su fecha de nacimiento con el siguiente formato: yyyy-MM-dd");
+            SimpleDateFormat sfd = new SimpleDateFormat("dd-MM-yyyy");
+            System.out.println("Por favor ingrese su fecha de nacimiento con el siguiente formato: dd-MM-yyyy");
             String fechita = fecha.readLine();
             Date birthday = null;
             String date = fechita;
@@ -147,15 +147,23 @@ public class RegistroPersona {
        }
        
        public void darEdad(){
-               int edad;
-               ahora.getYear();
-               edad = ahora.getYear()-1900 - e.getBirthday().getYear(); 
+               Date calendario = new Date();
+               DateTimeFormatter date = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+               int diaActual = calendario.getDate();
+               int mesActual = calendario.getMonth()+1;
+               int anioActual = calendario.getYear();
+               int edad2 = 0;
+               int edad = anioActual - e.getBirthday().getYear();
+                
+               if(e.getBirthday().getDate()>diaActual){
+                   if(e.getBirthday().getMonth()>=mesActual){
+                       if(anioActual>e.getBirthday().getYear()){
+                           edad--;
+                       }
+                   }
+               }
+               
                System.out.println("Tu edad es:" + edad + "\n¡GRACIAS POR REGISTRARSE!");
-               if(edad >= 130){
-                   System.out.println("Tu edad es invalida");
-                   pedirFechaNacimiento();
-               } 
- 
        }
     public void imprimirRegistro(){
         
@@ -188,7 +196,8 @@ public class RegistroPersona {
                 "\nNumero de CUIL: " + e.getCuil() +
                 "\nFecha de nacimiento: " + e.getBirthday().getDate() + "-"+ month + "-" + e.getBirthday().getYear());
         
-        }if(resultado.equalsIgnoreCase(negar)==true) {
+        }else if
+                (resultado.equalsIgnoreCase(negar)==true) {
             pedirNombre();
             pedirApellido();
             pedirTelefono();
@@ -200,6 +209,7 @@ public class RegistroPersona {
       public static boolean isNumeric(String str) {
         return (str.matches("[+-]?\\d*(\\.\\d+)?") && str.equals("")==false);
     }
+      
     public static void main(String[] args) {
         RegistroPersona rp = new RegistroPersona();
         Persona p = new Persona();
