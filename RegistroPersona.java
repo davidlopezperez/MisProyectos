@@ -102,19 +102,20 @@ public class RegistroPersona {
        
        public void pedirDni(){
            System.out.println("Por favor ingrese su número de Documento");
-           e.setDni(sc.nextInt());
+           int dni = sc.nextInt();
+           e.setDni(dni);
            
        }
        
-       public void pedirCUIL(){
+       public void pedirCuil(){
            System.out.println("Por favor ingrese su número de CUIL");
-           e.setCuil(sc.nextLine());
-           
+           int cuil = sc.nextInt();
+           e.setCuil(cuil);
+  
        }
        
        public void pedirFechaNacimiento(){
-           
-           
+ 
         try {
             BufferedReader fecha = new BufferedReader(new InputStreamReader(System.in));
             BufferedReader fechaNacimieto = new BufferedReader(fecha);
@@ -134,11 +135,11 @@ public class RegistroPersona {
                 
                 
             } catch (ParseException ex) {
-                Logger.getLogger(RegistroPersona.class.getName()).log(Level.SEVERE, null, ex);
+                ex.printStackTrace();
             }
          
         } catch (IOException ex) {
-            Logger.getLogger(RegistroPersona.class.getName()).log(Level.SEVERE, null, ex);
+            ex.printStackTrace();
         }
          
  
@@ -149,7 +150,7 @@ public class RegistroPersona {
                int edad;
                ahora.getYear();
                edad = ahora.getYear()-1900 - e.getBirthday().getYear(); 
-               System.out.println("Tu edad es:" + edad);
+               System.out.println("Tu edad es:" + edad + "\n¡GRACIAS POR REGISTRARSE!");
                if(edad >= 130){
                    System.out.println("Tu edad es invalida");
                    pedirFechaNacimiento();
@@ -158,14 +159,26 @@ public class RegistroPersona {
        }
     public void imprimirRegistro(){
         
-        int resultado = JOptionPane.showConfirmDialog(null, "¿Los datos ingresados son correctos?");
+        String confirmar = "si";
+        
+        String negar = "no";
+        
+        int month = e.getBirthday().getMonth() + 1;
+        
+        
+        String resultado = sc.nextLine();
         
         System.out.println("Usted se ha registrado con los siguientes datos: " +
                 "\nNombre: "  + p.getName() +
                 "\nApellido: " + p.getLastName() +
                 "\nNúmero de teléfono: " + p.getPhoneNumber() +
-                "\nNumero de documento: " + e.getDni());
-        if(resultado == 0){
+                "\nNumero de documento: " + e.getDni() +
+                "\nNúmero de CUIL: " + e.getCuil() +
+                "\nFecha de nacimiento: " + e.getBirthday().getDate()+ "-" + month +"-" + e.getBirthday().getYear());
+        System.out.println("¿Confirma que los datos ingresados son correctos?"+
+                "Confirme con un 'Si', caso contrario indique un 'No'"); 
+        resultado = sc.nextLine();
+        if(resultado.equalsIgnoreCase(confirmar) == true){
             
             System.out.println("Usted se ha registrado con los siguientes datos: " +
                 "\nNombre: " + p.getName().toUpperCase() +
@@ -173,13 +186,15 @@ public class RegistroPersona {
                 "\nNúmero de teléfono: " + p.getPhoneNumber() +
                 "\nNúmero de documento: " + e.getDni() +
                 "\nNumero de CUIL: " + e.getCuil() +
-                "\nFecha de nacimiento: " + e.getBirthday().getDate() + "-"+e.getBirthday().getMonth()+1 + "-" + e.getBirthday().getYear()+
-                    
-                "\n¡GRACIAS POR REGISTRARSE!");
-        }else{
+                "\nFecha de nacimiento: " + e.getBirthday().getDate() + "-"+ month + "-" + e.getBirthday().getYear());
+        
+        }if(resultado.equalsIgnoreCase(negar)==true) {
             pedirNombre();
             pedirApellido();
             pedirTelefono();
+            pedirDni();
+            pedirCuil();
+            pedirFechaNacimiento();
         }
     }
       public static boolean isNumeric(String str) {
@@ -193,11 +208,10 @@ public class RegistroPersona {
         rp.pedirApellido();
         rp.pedirTelefono();
         rp.pedirDni();
-        rp.pedirCUIL();
         rp.pedirFechaNacimiento();
+        rp.pedirCuil();
         rp.imprimirRegistro();
         rp.darEdad();
-        
     }
     }
   
