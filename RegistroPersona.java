@@ -155,16 +155,26 @@ public class RegistroPersona {
                int edad2 = 0;
                int edad = anioActual - e.getBirthday().getYear();
                 
-               if(e.getBirthday().getDate()>diaActual){
-                   if(e.getBirthday().getMonth()>=mesActual){
-                       if(anioActual>e.getBirthday().getYear()){
-                           edad--;
-                       }
-                   }
-               }
-               
-               System.out.println("Tu edad es:" + edad + "\n¡GRACIAS POR REGISTRARSE!");
+                     if(e.getBirthday().getDate()<diaActual){
+                      if(e.getBirthday().getMonth()>mesActual){
+                          edad--;
+                      }
+                  }
+                     if(e.getBirthday().getDate()<=diaActual){
+                         if(e.getBirthday().getMonth()>=mesActual){
+                             edad = edad;
+                         }
+                     }
+                     if(e.getBirthday().getDate()>=diaActual){
+                         if(e.getBirthday().getDate()>=mesActual){
+                             edad--;
+                         }
+                     }
+               System.out.println("Tu edad es:" + edad + "\n¡GRACIAS POR REGISTRARSE!");      
        }
+               
+               
+       
     public void imprimirRegistro(){
         
         String confirmar = "si";
