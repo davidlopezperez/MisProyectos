@@ -108,10 +108,19 @@ public class RegistroPersona {
        }
        
        public void pedirCuil(){
-           System.out.println("Por favor ingrese su número de CUIL");
-           int cuil = sc.nextInt();
-           e.setCuil(cuil);
            
+           System.out.println("Por favor ingrese su número de CUIL");
+           String cuil = sc.nextLine();
+           e.setCuil(sc.nextLine());
+           
+           
+           do{
+    
+              System.out.println("Por favor ingrese un número de CUIL válido");
+              cuil = sc.nextLine();
+              e.setCuil(cuil);
+          
+           }while(validarCuil(cuil) == true);
        }
        
        public void pedirFechaNacimiento(){
@@ -219,6 +228,10 @@ public class RegistroPersona {
       public static boolean isNumeric(String str) {
         return (str.matches("[+-]?\\d*(\\.\\d+)?") && str.equals("")==false);
     }
+      public static boolean validarCuil(String cuilValido){
+        return (cuilValido.matches("^([0-9]{2}[-]{1})([0-9]{7,8}[-]{1}([0-9]{1}))") == false);
+        
+    }
       
     public static void main(String[] args) {
         RegistroPersona rp = new RegistroPersona();
@@ -232,6 +245,7 @@ public class RegistroPersona {
         rp.pedirCuil();
         rp.imprimirRegistro();
         rp.darEdad();
+
     }
     }
   
